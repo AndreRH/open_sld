@@ -321,12 +321,17 @@ class SLD_Controller(object):
 #
 # Main
 
+
+setvidpid(0x09fb, 0x6001) # make DE0 known by ftd2xx library
+print 'detected devices', list_devices() # make sure the device is detected
+
+
 # Program the DE0-Nano
 
-print 'Programming ...'
-command_line = 'quartus_pgm -c USB-Blaster -m JTAG -o p;InitialTest.sof'
-r = subprocess.call(command_line)
-print 'return code:', r
+# print 'Programming ...'
+# command_line = 'quartus_pgm -c USB-Blaster -m JTAG -o p;InitialTest.sof'
+# r = subprocess.call(command_line)
+# print 'return code:', r
 
 print
 print 'Testing'
@@ -336,26 +341,28 @@ sld = SLD_Controller('USB-Blaster', 4, 1)
 # For debug
 #sld = SLD_Controller('CSV', 4, 1, 'test2.csv')
 
-sld.TAP_Reset()
+# sld.TAP_Reset()
 
-d = 0
-while True:
+sld.VDR_Write(BitArray('0b010101'))
+
+# d = 0
+# while True:
+#
+#     sld.VIR_Write(1, BitArray('0b10001'))
+#     read_back = sld.VDR_Write_Read(BitArray(uint=d, length=7))
+#     sld.VIR_Write(1, BitArray('0b10000'))
+#
+#     print read_back.bin
+#
+#     if d == 127:
+#         d = 0
+#         break
+#     else:
+#         d += 1
+#
+#     sleep(0.1)
     
-    sld.VIR_Write(1, BitArray('0b10001')) 
-    read_back = sld.VDR_Write_Read(BitArray(uint=d, length=7))
-    sld.VIR_Write(1, BitArray('0b10000'))
-    
-    print read_back.bin
-    
-    if d == 127:
-        d = 0
-        break
-    else:
-        d += 1
-        
-    sleep(0.1)
-    
-sld.TAP_Reset()
+# sld.TAP_Reset()
 sld.close()
 print 
 print 'closed'

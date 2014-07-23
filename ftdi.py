@@ -60,6 +60,8 @@ ft_messages = ['OK',
 
 if sys.platform == 'win32':
     ft = c.windll.ftd2xx
+if sys.platform == 'darwin':
+    ft = c.CDLL('libftd2xx.1.2.2.dylib')
 else:
     ft = c.CDLL('libftd2xx.so')
 
@@ -197,10 +199,18 @@ def _PY_GetDriverVersion(*args):
 def _PY_GetLibraryVersion(*args):
     return ft.FT_GetLibraryVersion(*args)
 
+@ftExceptionDecorator
+def _PY_SetVIDPID(*args):
+    return ft.FT_SetVIDPID(*args)
+
 
 #------------------------------------------------------------------------------
 #
 # Start of python functions for FTDI API calls
+
+def setvidpid(vid, pid):
+    return _PY_SetVIDPID(vid, pid)
+
 
 def list_devices():
     
