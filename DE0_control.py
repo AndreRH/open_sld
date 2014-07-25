@@ -2,6 +2,7 @@ from ftdi import list_devices, setvidpid
 from sld_controller import SLD_Controller
 from bitstring import BitArray
 import sys
+from time import sleep
 
 
 def main():
@@ -14,9 +15,20 @@ def main():
 
     sld = SLD_Controller('USB-Blaster', 4, 1)
 
-    # sld.TAP_Reset()
+    sld.TAP_Reset()
 
-    print sld.VDR_Write_Read(BitArray('0b1010101'))
+    #this is required somewhy
+    sld.VIR_Write(1, BitArray('0b10001'))
+
+    sld.VDR_Write(BitArray('0b0000001'))
+    sleep(.3)
+    sld.VDR_Write(BitArray('0b0000010'))
+    sleep(.3)
+    sld.VDR_Write(BitArray('0b0000100'))
+    sleep(.3)
+    sld.VDR_Write(BitArray('0b0001000'))
+    sleep(.3)
+
     sld.close()
 
 if __name__ == '__main__':

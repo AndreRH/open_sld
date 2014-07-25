@@ -110,10 +110,7 @@ class SLD_Controller(object):
 
     def __init__(self, interface_name, m_width, n_width, csv_file_name = ''):
 
-        if interface_name == 'CSV':
-            self.interface = CSV_Writer(csv_file_name)
-        else:
-            self.interface = open_ex_by_name(interface_name)
+        self.interface = open_ex_by_name(interface_name)
 
         self.instruction_width  = 10
         self.virtual_inst_width = m_width
