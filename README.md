@@ -1,5 +1,11 @@
 ##                  Readme file for open_sld project
   
+7/23/2014 - Ilia Sergachev (ilia.sergachev@gmail.com)
+
+The project was modified a little bit to run on MacOSX with DE0 (not nano) board.
+
+  
+  
 4/25/2014 - Vern Muhr (vernm10@comcast.net)  
 
 The goal of this project is to create a python module that performs USB
