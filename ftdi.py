@@ -60,9 +60,10 @@ ft_messages = ['OK',
 
 if sys.platform == 'win32':
     ft = c.windll.ftd2xx
-if sys.platform == 'darwin':
+elif sys.platform == 'darwin':
     ft = c.CDLL('libftd2xx.1.2.2.dylib')
 else:
+    print sys.platform
     ft = c.CDLL('libftd2xx.so')
 
 #------------------------------------------------------------------------------
