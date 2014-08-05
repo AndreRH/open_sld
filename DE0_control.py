@@ -6,7 +6,7 @@ from time import sleep
 
 
 def main():
-    if sys.platform == 'darwin':
+    if sys.platform == 'darwin' or sys.platform == 'linux2':
         setvidpid(0x09fb, 0x6001) # make DE0 known by ftd2xx library
     devs=list_devices()
     print 'detected devices', devs # make sure the device is detected

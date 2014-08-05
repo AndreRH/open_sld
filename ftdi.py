@@ -62,6 +62,8 @@ if sys.platform == 'win32':
     ft = c.windll.ftd2xx
 elif sys.platform == 'darwin':
     ft = c.CDLL('libftd2xx.1.2.2.dylib')
+elif sys.platform == 'linux2':
+    ft = c.CDLL('libftd2xx.so')
 else:
     print sys.platform
     ft = c.CDLL('libftd2xx.so')
