@@ -17,7 +17,7 @@ def main():
 
     sld.TAP_Reset()
 
-    #this is required somewhy
+
     sld.VIR_Write(1, BitArray('0b10001'))
 
     sld.VDR_Write(BitArray('0b0000001'))
@@ -28,6 +28,8 @@ def main():
     sleep(.3)
     sld.VDR_Write(BitArray('0b0001000'))
     sleep(.3)
+
+    sld.VIR_Write(1, BitArray('0b10000'))
 
     sld.close()
 
