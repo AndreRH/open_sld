@@ -33,26 +33,22 @@ def main():
     b = 0
     sld.VIR_Write(1, BitArray('0b10001'))
 
-    while True:
+    options = {0 : 0x08,
+               1 : 0x14,
+               2 : 0x22,
+               3 : 0x41,
+               4 : 0x22,
+               5 : 0x14,
+    }
+
+    while b < 50:
 
         read_back = sld.VDR_Write_Read(BitArray(uint=d, length=7))
         print read_back.bin
 
-        if a == 0:
-            d = 8
-        elif a == 1:
-            d = 20
-        elif a == 2:
-            d = 34
-        elif a == 3:
-            d = 65
-        elif a == 4:
-            d = 34
-        else:
-            d = 20
+        sleep(0.15)
 
-        if b == 50:
-            break
+        d = options[a]
 
         if a == 5:
             a = 0
@@ -60,8 +56,6 @@ def main():
             continue
 
         a += 1
-
-        sleep(0.15)
 
     sld.VIR_Write(1, BitArray('0b10000'))
     sld.TAP_Reset()
