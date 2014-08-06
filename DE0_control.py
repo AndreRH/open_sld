@@ -31,12 +31,11 @@ def main():
     d = 0
     a = 0
     b = 0
+    sld.VIR_Write(1, BitArray('0b10001'))
+
     while True:
 
-        sld.VIR_Write(1, BitArray('0b10001'))
         read_back = sld.VDR_Write_Read(BitArray(uint=d, length=7))
-        sld.VIR_Write(1, BitArray('0b10000'))
-
         print read_back.bin
 
         if a == 0:
@@ -64,6 +63,7 @@ def main():
 
         sleep(0.15)
 
+    sld.VIR_Write(1, BitArray('0b10000'))
     sld.TAP_Reset()
     sld.close()
 
