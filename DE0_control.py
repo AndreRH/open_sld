@@ -28,7 +28,9 @@ def main():
 
     sld.TAP_Reset()
 
-    d = 127
+    d = 0
+    a = 0
+    b = 0
     while True:
 
         sld.VIR_Write(1, BitArray('0b10001'))
@@ -37,13 +39,30 @@ def main():
 
         print read_back.bin
 
-        if d == 0:
-            d = 127
-            break
+        if a == 0:
+            d = 8
+        elif a == 1:
+            d = 20
+        elif a == 2:
+            d = 34
+        elif a == 3:
+            d = 65
+        elif a == 4:
+            d = 34
         else:
-            d -= 1
+            d = 20
 
-        sleep(0.1)
+        if b == 50:
+            break
+
+        if a == 5:
+            a = 0
+            b += 1
+            continue
+
+        a += 1
+
+        sleep(0.15)
 
     sld.TAP_Reset()
     sld.close()
